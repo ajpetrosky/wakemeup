@@ -1,0 +1,6 @@
+framework module Pods_Wake_Me_Up {
+  umbrella header "Pods-Wake Me Up-umbrella.h"
+
+  export *
+  module * { export * }
+}

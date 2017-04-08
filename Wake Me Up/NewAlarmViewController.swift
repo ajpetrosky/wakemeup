@@ -16,7 +16,6 @@ class NewAlarmViewController: UIViewController {
         let statusBarColor = UIColor(red: 153/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
         statusBarBackground.backgroundColor = statusBarColor
         view.addSubview(statusBarBackground)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
