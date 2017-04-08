@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3AF6D0F61E995B110018B5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D0F51E995B110018B5A1 /* AppDelegate.swift */; };
-		3AF6D0F81E995B110018B5A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D0F71E995B110018B5A1 /* ViewController.swift */; };
 		3AF6D0FB1E995B110018B5A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6D0F91E995B110018B5A1 /* Main.storyboard */; };
 		3AF6D0FE1E995B110018B5A1 /* Wake_Me_Up.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D0FC1E995B110018B5A1 /* Wake_Me_Up.xcdatamodeld */; };
 		3AF6D1001E995B110018B5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6D0FF1E995B110018B5A1 /* Assets.xcassets */; };
 		3AF6D1031E995B110018B5A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6D1011E995B110018B5A1 /* LaunchScreen.storyboard */; };
 		3AF6D10E1E995B110018B5A1 /* Wake_Me_UpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D10D1E995B110018B5A1 /* Wake_Me_UpTests.swift */; };
 		3AF6D1191E995B110018B5A1 /* Wake_Me_UpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D1181E995B110018B5A1 /* Wake_Me_UpUITests.swift */; };
+		3AF6D1271E9972520018B5A1 /* NewAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D1261E9972520018B5A1 /* NewAlarmViewController.swift */; };
+		3AF6D1291E9973270018B5A1 /* AlarmsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D1281E9973270018B5A1 /* AlarmsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,6 @@
 /* Begin PBXFileReference section */
 		3AF6D0F21E995B110018B5A1 /* Wake Me Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wake Me Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF6D0F51E995B110018B5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3AF6D0F71E995B110018B5A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3AF6D0FA1E995B110018B5A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AF6D0FD1E995B110018B5A1 /* Wake_Me_Up.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wake_Me_Up.xcdatamodel; sourceTree = "<group>"; };
 		3AF6D0FF1E995B110018B5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +49,8 @@
 		3AF6D1141E995B110018B5A1 /* Wake Me UpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wake Me UpUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF6D1181E995B110018B5A1 /* Wake_Me_UpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wake_Me_UpUITests.swift; sourceTree = "<group>"; };
 		3AF6D11A1E995B110018B5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AF6D1261E9972520018B5A1 /* NewAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAlarmViewController.swift; sourceTree = "<group>"; };
+		3AF6D1281E9973270018B5A1 /* AlarmsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				3AF6D0F51E995B110018B5A1 /* AppDelegate.swift */,
-				3AF6D0F71E995B110018B5A1 /* ViewController.swift */,
+				3AF6D1261E9972520018B5A1 /* NewAlarmViewController.swift */,
 				3AF6D0F91E995B110018B5A1 /* Main.storyboard */,
+				3AF6D1281E9973270018B5A1 /* AlarmsTableViewController.swift */,
 				3AF6D0FF1E995B110018B5A1 /* Assets.xcassets */,
 				3AF6D1011E995B110018B5A1 /* LaunchScreen.storyboard */,
 				3AF6D1041E995B110018B5A1 /* Info.plist */,
@@ -265,7 +268,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF6D0F81E995B110018B5A1 /* ViewController.swift in Sources */,
+				3AF6D1271E9972520018B5A1 /* NewAlarmViewController.swift in Sources */,
+				3AF6D1291E9973270018B5A1 /* AlarmsTableViewController.swift in Sources */,
 				3AF6D0F61E995B110018B5A1 /* AppDelegate.swift in Sources */,
 				3AF6D0FE1E995B110018B5A1 /* Wake_Me_Up.xcdatamodeld in Sources */,
 			);
