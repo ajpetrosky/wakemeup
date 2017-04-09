@@ -7,17 +7,72 @@
 //
 
 import UIKit
+import Contacts
+import ContactsUI
 
 class ContactsTableViewController: UITableViewController {
+    
+    var store : CNContactStore!
+    var contacts : [CNContact]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        store = CNContactStore()
+        contacts = []
+        let authorizationStatus = CNContactStore.authorizationStatus(for: .contacts)
+        
+        switch authorizationStatus {
+        case .authorized:
+            var allContainers: [CNContainer] = []
+            do {
+                allContainers = try self.store.containers(matching: nil)
+            } catch {
+                print("Error fetching containers")
+            }
+            for container in allContainers {
+                let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+                
+                do {
+                    let containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor])
+                    self.contacts?.append(contentsOf: containerResults)
+                } catch {
+                    print("Error fetching results for container")
+                }
+            }
+            self.tableView.reloadData()
+        case .notDetermined:
+            self.store.requestAccess(for: .contacts, completionHandler: { (access, error) -> Void in
+                if access {
+                    var allContainers: [CNContainer] = []
+                    do {
+                        allContainers = try self.store.containers(matching: nil)
+                    } catch {
+                        print("Error fetching containers")
+                    }
+                    for container in allContainers {
+                        let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+                        
+                        do {
+                            let containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor])
+                            self.contacts?.append(contentsOf: containerResults)
+                        } catch {
+                            print("Error fetching results for container")
+                        }
+                    }
+                    self.tableView.reloadData()
+                }
+                else {
+                    if authorizationStatus == .denied {
+                        DispatchQueue.main.async(execute: { () -> Void in
+                            let message = "\(error!.localizedDescription)\n\nPlease allow Wake Me Up to access your contacts through Settings."
+                            self.showAlert(message: message)
+                        })
+                    }
+                }
+            })
+        default:
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +84,36 @@ class ContactsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return (contacts?.count)!
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
+        let contact = contacts?[indexPath.row]
+        if let firstName = contact?.givenName {
+            cell.textLabel?.text = firstName
+            if let lastName = contact?.familyName {
+                cell.textLabel?.text = (cell.textLabel?.text)! + " " + lastName
+            }
+        }
+        
+        let numbers = contact?.phoneNumbers
+        let number = ((numbers?.first?.value)! as CNPhoneNumber).stringValue
+        cell.detailTextLabel?.text = number
 
         return cell
     }
-    */
+    
+    func showAlert(message : String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     /*
     // Override to support conditional editing of the table view.
