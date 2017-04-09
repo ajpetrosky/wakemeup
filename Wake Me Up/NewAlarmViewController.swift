@@ -30,6 +30,7 @@ class NewAlarmViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "detailsSegue" {
             embeddedDetailViewController = segue.destination as! DetailTableViewController
+            embeddedDetailViewController.parentController = self
         }
     }
 

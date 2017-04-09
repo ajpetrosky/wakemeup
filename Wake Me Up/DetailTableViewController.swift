@@ -9,6 +9,8 @@
 import UIKit
 
 class DetailTableViewController: UITableViewController {
+    
+    var parentController : NewAlarmViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,11 @@ class DetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         if row == 1 {
-            performSegue(withIdentifier: "selectTimeSegue", sender: self)
+            parentController.performSegue(withIdentifier: "selectTimeSegue", sender: parentController)
+        } else if row == 3 {
+            parentController.performSegue(withIdentifier: "selectSoundSegue", sender: parentController)
+        } else if row == 4 {
+            parentController.performSegue(withIdentifier: "selectContactSegue", sender: parentController)
         }
     }
 
