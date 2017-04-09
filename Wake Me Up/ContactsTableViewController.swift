@@ -110,11 +110,15 @@ class ContactsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (contacts?.count)!
+        return (contacts?.count)! + 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "None"
+            return cell
+        }
         let contact = contacts?[indexPath.row]
         if let firstName = contact?.givenName {
             cell.textLabel?.text = firstName

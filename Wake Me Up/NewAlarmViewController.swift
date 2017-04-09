@@ -21,6 +21,8 @@ class NewAlarmViewController: UIViewController {
     }
     
     @IBAction func saveAlarm(_ sender: Any) {
+        
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
 
@@ -33,6 +35,12 @@ class NewAlarmViewController: UIViewController {
             embeddedDetailViewController.parentController = self
         } else if id == "selectContactSegue" {
             let dest = segue.destination as! ContactsTableViewController
+            dest.detailsController = self.embeddedDetailViewController
+        } else if id == "selectTimeSegue" {
+            let dest = segue.destination as! TimeViewController
+            dest.detailsController = self.embeddedDetailViewController
+        }else if id == "selectSoundSegue" {
+            let dest = segue.destination as! SoundViewController
             dest.detailsController = self.embeddedDetailViewController
         }
     }

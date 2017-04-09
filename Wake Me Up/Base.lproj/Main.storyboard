@@ -209,18 +209,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3DE-ka-mwQ">
-                                <rect key="frame" x="27.5" y="205.5" width="320" height="216"/>
+                                <rect key="frame" x="16" y="74" width="343" height="216"/>
                                 <color key="tintColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiS-od-U4p">
-                                <rect key="frame" x="0.0" y="421.5" width="375" height="245.5"/>
+                                <rect key="frame" x="0.0" y="300" width="375" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaR-Pe-aAQ">
-                                        <rect key="frame" x="124" y="102" width="126" height="42"/>
+                                        <rect key="frame" x="124" y="29" width="126" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="Play Sound">
-                                            <color key="titleColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
+                                        <state key="normal" title="Play Sound"/>
                                         <connections>
                                             <action selector="playSound:" destination="JSt-4X-auZ" eventType="touchUpInside" id="LUb-Rq-pGT"/>
                                         </connections>
@@ -228,19 +226,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="HaR-Pe-aAQ" firstAttribute="centerY" secondItem="IiS-od-U4p" secondAttribute="centerY" id="DBT-qC-12o"/>
-                                    <constraint firstItem="HaR-Pe-aAQ" firstAttribute="centerX" secondItem="IiS-od-U4p" secondAttribute="centerX" id="cfM-IY-34C"/>
+                                    <constraint firstItem="HaR-Pe-aAQ" firstAttribute="centerX" secondItem="IiS-od-U4p" secondAttribute="centerX" id="JBv-1Y-BTF"/>
+                                    <constraint firstItem="HaR-Pe-aAQ" firstAttribute="centerY" secondItem="IiS-od-U4p" secondAttribute="centerY" id="ulj-rX-6uK"/>
+                                    <constraint firstAttribute="height" constant="100" id="xRo-hd-hYd"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3DE-ka-mwQ" firstAttribute="centerX" secondItem="gpX-Tq-pX3" secondAttribute="centerX" id="6ev-OY-4i3"/>
-                            <constraint firstItem="XMK-jP-hiQ" firstAttribute="top" secondItem="IiS-od-U4p" secondAttribute="bottom" id="BGH-oh-JgQ"/>
-                            <constraint firstItem="IiS-od-U4p" firstAttribute="top" secondItem="3DE-ka-mwQ" secondAttribute="bottom" id="Dtw-z5-Ugz"/>
-                            <constraint firstItem="IiS-od-U4p" firstAttribute="leading" secondItem="gpX-Tq-pX3" secondAttribute="leading" id="DwA-OK-9OS"/>
-                            <constraint firstAttribute="trailing" secondItem="IiS-od-U4p" secondAttribute="trailing" id="SMY-nP-y2b"/>
-                            <constraint firstItem="3DE-ka-mwQ" firstAttribute="centerY" secondItem="gpX-Tq-pX3" secondAttribute="centerY" constant="-20" id="bKJ-u9-w58"/>
+                            <constraint firstItem="3DE-ka-mwQ" firstAttribute="top" secondItem="UPd-ci-eq5" secondAttribute="bottom" constant="10" id="FEY-aI-Lnx"/>
+                            <constraint firstItem="IiS-od-U4p" firstAttribute="leading" secondItem="gpX-Tq-pX3" secondAttribute="leading" id="Mtu-le-D2P"/>
+                            <constraint firstItem="IiS-od-U4p" firstAttribute="top" secondItem="3DE-ka-mwQ" secondAttribute="bottom" constant="10" id="NpG-GY-uK6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3DE-ka-mwQ" secondAttribute="trailing" id="ccx-pn-9Br"/>
+                            <constraint firstItem="3DE-ka-mwQ" firstAttribute="leading" secondItem="gpX-Tq-pX3" secondAttribute="leadingMargin" id="khe-mB-MMD"/>
+                            <constraint firstAttribute="trailing" secondItem="IiS-od-U4p" secondAttribute="trailing" id="m5t-Rk-bCg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Select Sound" id="S3a-bq-lJr">
@@ -532,7 +531,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="qyi-PS-uGa">
-                                <rect key="frame" x="27.5" y="225" width="320" height="216"/>
+                                <rect key="frame" x="26" y="104" width="323" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="513449407.97092402">
                                     <!--2017-04-09 16:50:07 +0000-->
                                 </date>
@@ -540,8 +539,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qyi-PS-uGa" firstAttribute="centerX" secondItem="AfW-32-U1k" secondAttribute="centerX" id="A1O-rE-VsB"/>
-                            <constraint firstItem="qyi-PS-uGa" firstAttribute="centerY" secondItem="AfW-32-U1k" secondAttribute="centerY" id="JGF-nF-cKQ"/>
+                            <constraint firstItem="qyi-PS-uGa" firstAttribute="top" secondItem="vBg-gw-cJI" secondAttribute="bottom" constant="40" id="5Gr-ke-WXa"/>
+                            <constraint firstItem="qyi-PS-uGa" firstAttribute="leading" secondItem="AfW-32-U1k" secondAttribute="leadingMargin" constant="10" id="Lq5-B9-yoB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qyi-PS-uGa" secondAttribute="trailing" constant="10" id="dv9-za-ttu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Select Time" id="prI-QD-ceX">

@@ -11,6 +11,7 @@ import UIKit
 class TimeViewController: UIViewController {
 
     @IBOutlet weak var timePicker: UIDatePicker!
+    var detailsController : DetailTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,10 @@ class TimeViewController: UIViewController {
     }
     
     @IBAction func doneSelectingTime(_ sender: Any) {
-        
+        let timeFormatter = DateFormatter()
+        timeFormatter.timeStyle = DateFormatter.Style.short
+        let time = timeFormatter.string(from: timePicker.date)
+        detailsController.alarmTime.text = time
         _ = self.navigationController?.popViewController(animated: true)
     }
 
