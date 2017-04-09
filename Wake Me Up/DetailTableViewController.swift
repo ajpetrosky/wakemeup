@@ -1,14 +1,14 @@
 //
-//  AlarmsTableViewController.swift
+//  DetailTableViewController.swift
 //  Wake Me Up
 //
-//  Created by Andrew Petrosky on 4/8/17.
+//  Created by Andrew Petrosky on 4/9/17.
 //  Copyright © 2017 edu.upenn.seas.cis195. All rights reserved.
 //
 
 import UIKit
 
-class AlarmsTableViewController: UITableViewController {
+class DetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +25,6 @@ class AlarmsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func addAlarm(_ sender: Any) {
-        self.performSegue(withIdentifier: "editAlarmSegue", sender: self)
-    }
-    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -38,7 +34,14 @@ class AlarmsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 6
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        if row == 1 {
+            performSegue(withIdentifier: "selectTimeSegue", sender: self)
+        }
     }
 
     /*

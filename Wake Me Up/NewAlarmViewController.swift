@@ -9,13 +9,11 @@
 import UIKit
 
 class NewAlarmViewController: UIViewController {
+    
+    private var embeddedDetailViewController : DetailTableViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let statusBarBackground = UIView(frame: UIApplication.shared.statusBarFrame)
-        let statusBarColor = UIColor(red: 153/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
-        statusBarBackground.backgroundColor = statusBarColor
-        view.addSubview(statusBarBackground)
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,14 +22,15 @@ class NewAlarmViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "detailsSegue" {
+            embeddedDetailViewController = segue.destination as! DetailTableViewController
+        }
     }
-    */
 
 }
