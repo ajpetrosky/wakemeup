@@ -180,7 +180,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="New/Edit Alarm" id="8b7-H7-gL3">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="fsn-Ie-jpJ"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="T9d-Sy-rxi"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="T9d-Sy-rxi">
+                            <connections>
+                                <action selector="saveAlarm:" destination="ADB-Xn-4MB" id="y13-Ud-NQ4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="hsY-pw-UBe" kind="show" identifier="selectTimeSegue" id="ayU-nb-T4u"/>
@@ -195,7 +199,7 @@
         <!--Select Sound-->
         <scene sceneID="16Z-c5-5cp">
             <objects>
-                <viewController id="JSt-4X-auZ" sceneMemberID="viewController">
+                <viewController id="JSt-4X-auZ" customClass="SoundViewController" customModule="Wake_Me_Up" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UPd-ci-eq5"/>
                         <viewControllerLayoutGuide type="bottom" id="XMK-jP-hiQ"/>
@@ -217,6 +221,9 @@
                                         <state key="normal" title="Play Sound">
                                             <color key="titleColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="playSound:" destination="JSt-4X-auZ" eventType="touchUpInside" id="LUb-Rq-pGT"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -238,8 +245,15 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select Sound" id="S3a-bq-lJr">
                         <barButtonItem key="backBarButtonItem" title="Details" id="uYd-Y1-uiY"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="1Ej-dT-6EC"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="1Ej-dT-6EC">
+                            <connections>
+                                <action selector="doneSelectingSound:" destination="JSt-4X-auZ" id="Nqh-xG-c1R"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="soundPicker" destination="3DE-ka-mwQ" id="x0A-l1-14b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DpS-CC-kwr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -400,21 +414,40 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text After: 10 minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmx-oy-PyA">
-                                                    <rect key="frame" x="8" y="11" width="167" height="21"/>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minimumValue="1" maximumValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="0LX-c6-S2e">
+                                                    <rect key="frame" x="273" y="8" width="94" height="29"/>
+                                                    <connections>
+                                                        <action selector="textTimeIncremented:forEvent:" destination="ZWH-fk-Ugd" eventType="valueChanged" id="t7i-35-MA8"/>
+                                                    </connections>
+                                                </stepper>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text After: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjh-ry-8T5">
+                                                    <rect key="frame" x="8" y="11" width="83.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minimumValue="1" maximumValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="0LX-c6-S2e">
-                                                    <rect key="frame" x="273" y="8" width="94" height="29"/>
-                                                </stepper>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKU-po-6e5">
+                                                    <rect key="frame" x="92" y="11" width="18" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xz-ee-tPO">
+                                                    <rect key="frame" x="110" y="11" width="65.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="nmx-oy-PyA" firstAttribute="leading" secondItem="YWy-rT-lto" secondAttribute="leadingMargin" id="Qgf-LP-YgU"/>
-                                                <constraint firstItem="nmx-oy-PyA" firstAttribute="top" secondItem="YWy-rT-lto" secondAttribute="topMargin" constant="3" id="coA-0J-bgo"/>
+                                                <constraint firstItem="1xz-ee-tPO" firstAttribute="leading" secondItem="hKU-po-6e5" secondAttribute="trailing" id="YyQ-z6-3LQ"/>
+                                                <constraint firstItem="Vjh-ry-8T5" firstAttribute="top" secondItem="YWy-rT-lto" secondAttribute="topMargin" constant="3" id="bv4-gP-6xb"/>
                                                 <constraint firstItem="0LX-c6-S2e" firstAttribute="centerY" secondItem="YWy-rT-lto" secondAttribute="centerY" id="gjp-W7-ct4"/>
                                                 <constraint firstAttribute="trailing" secondItem="0LX-c6-S2e" secondAttribute="trailing" constant="8" id="m1l-XM-MiN"/>
+                                                <constraint firstItem="hKU-po-6e5" firstAttribute="top" secondItem="YWy-rT-lto" secondAttribute="topMargin" constant="3" id="mYW-3K-RJ6"/>
+                                                <constraint firstItem="1xz-ee-tPO" firstAttribute="top" secondItem="YWy-rT-lto" secondAttribute="topMargin" constant="3" id="q6k-Jr-HSy"/>
+                                                <constraint firstItem="hKU-po-6e5" firstAttribute="leading" secondItem="Vjh-ry-8T5" secondAttribute="trailing" id="sES-Ba-vWh"/>
+                                                <constraint firstItem="Vjh-ry-8T5" firstAttribute="leading" secondItem="YWy-rT-lto" secondAttribute="leadingMargin" id="udc-d1-sLD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -426,6 +459,14 @@
                             <outlet property="delegate" destination="ZWH-fk-Ugd" id="OYi-pA-09M"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="alarmContact" destination="Agb-lD-Cm1" id="eWj-US-tIU"/>
+                        <outlet property="alarmName" destination="c3M-Nd-uZe" id="MLO-0l-jk7"/>
+                        <outlet property="alarmSnooze" destination="cDR-uo-NqU" id="1hn-Jt-1ed"/>
+                        <outlet property="alarmSound" destination="mT5-mh-wLg" id="aXq-8h-3AJ"/>
+                        <outlet property="alarmTextTime" destination="hKU-po-6e5" id="d0Q-pX-hGV"/>
+                        <outlet property="alarmTime" destination="QDg-PW-3ix" id="Csd-nI-vlc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFS-iu-s2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -481,7 +522,7 @@
         <!--Select Time-->
         <scene sceneID="EBz-nv-Yws">
             <objects>
-                <viewController id="hsY-pw-UBe" sceneMemberID="viewController">
+                <viewController id="hsY-pw-UBe" customClass="TimeViewController" customModule="Wake_Me_Up" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vBg-gw-cJI"/>
                         <viewControllerLayoutGuide type="bottom" id="6I1-hB-nat"/>
@@ -505,8 +546,15 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select Time" id="prI-QD-ceX">
                         <barButtonItem key="backBarButtonItem" title="Details" id="2gp-nn-BOy"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="wf5-kT-1Yr"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="wf5-kT-1Yr">
+                            <connections>
+                                <action selector="doneSelectingTime:" destination="hsY-pw-UBe" id="sI6-9n-jbU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="timePicker" destination="qyi-PS-uGa" id="HcO-QG-32R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUM-yM-V89" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

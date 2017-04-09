@@ -19,6 +19,9 @@
 		3AF6D1291E9973270018B5A1 /* AlarmsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D1281E9973270018B5A1 /* AlarmsTableViewController.swift */; };
 		3AF6D12B1E9A9EA80018B5A1 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D12A1E9A9EA80018B5A1 /* DetailTableViewController.swift */; };
 		3AF6D12D1E9AB30A0018B5A1 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D12C1E9AB30A0018B5A1 /* ContactsTableViewController.swift */; };
+		3AF6D12F1E9AD1880018B5A1 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D12E1E9AD1880018B5A1 /* TimeViewController.swift */; };
+		3AF6D1311E9AD1EA0018B5A1 /* SoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D1301E9AD1EA0018B5A1 /* SoundViewController.swift */; };
+		3AF6D1331E9AD63C0018B5A1 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D1321E9AD63C0018B5A1 /* Alarm.swift */; };
 		7CABA095FDE13C3FB79CB64B /* Pods_Wake_Me_UpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E203AFE510597AB30690E8 /* Pods_Wake_Me_UpTests.framework */; };
 		C18CF0CA13A7454830B24C0C /* Pods_Wake_Me_UpUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF8F096C23A88F1C88A0F49 /* Pods_Wake_Me_UpUITests.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +61,9 @@
 		3AF6D1281E9973270018B5A1 /* AlarmsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmsTableViewController.swift; sourceTree = "<group>"; };
 		3AF6D12A1E9A9EA80018B5A1 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		3AF6D12C1E9AB30A0018B5A1 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
+		3AF6D12E1E9AD1880018B5A1 /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
+		3AF6D1301E9AD1EA0018B5A1 /* SoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundViewController.swift; sourceTree = "<group>"; };
+		3AF6D1321E9AD63C0018B5A1 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		4AE0BBAF8AEFA89D86B254BA /* Pods-Wake Me UpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wake Me UpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wake Me UpTests/Pods-Wake Me UpTests.release.xcconfig"; sourceTree = "<group>"; };
 		6E4E364162F91EE70BE36198 /* Pods-Wake Me UpUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wake Me UpUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wake Me UpUITests/Pods-Wake Me UpUITests.release.xcconfig"; sourceTree = "<group>"; };
 		779C3C4C8007D988CA0CA714 /* Pods-Wake Me Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wake Me Up.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wake Me Up/Pods-Wake Me Up.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +131,9 @@
 				3AF6D0F51E995B110018B5A1 /* AppDelegate.swift */,
 				3AF6D1261E9972520018B5A1 /* NewAlarmViewController.swift */,
 				3AF6D0F91E995B110018B5A1 /* Main.storyboard */,
+				3AF6D12E1E9AD1880018B5A1 /* TimeViewController.swift */,
+				3AF6D1301E9AD1EA0018B5A1 /* SoundViewController.swift */,
+				3AF6D1321E9AD63C0018B5A1 /* Alarm.swift */,
 				3AF6D12C1E9AB30A0018B5A1 /* ContactsTableViewController.swift */,
 				3AF6D12A1E9A9EA80018B5A1 /* DetailTableViewController.swift */,
 				3AF6D1281E9973270018B5A1 /* AlarmsTableViewController.swift */,
@@ -463,8 +472,11 @@
 			files = (
 				3AF6D1271E9972520018B5A1 /* NewAlarmViewController.swift in Sources */,
 				3AF6D12B1E9A9EA80018B5A1 /* DetailTableViewController.swift in Sources */,
+				3AF6D1331E9AD63C0018B5A1 /* Alarm.swift in Sources */,
 				3AF6D12D1E9AB30A0018B5A1 /* ContactsTableViewController.swift in Sources */,
 				3AF6D1291E9973270018B5A1 /* AlarmsTableViewController.swift in Sources */,
+				3AF6D1311E9AD1EA0018B5A1 /* SoundViewController.swift in Sources */,
+				3AF6D12F1E9AD1880018B5A1 /* TimeViewController.swift in Sources */,
 				3AF6D0F61E995B110018B5A1 /* AppDelegate.swift in Sources */,
 				3AF6D0FE1E995B110018B5A1 /* Wake_Me_Up.xcdatamodeld in Sources */,
 			);

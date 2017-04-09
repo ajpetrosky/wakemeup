@@ -33,7 +33,16 @@ class ContactsTableViewController: UITableViewController {
                 let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
                 
                 do {
-                    let containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor])
+                    var containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor])
+                    var i = 0
+                    while (i < containerResults.count) {
+                        let contact = containerResults[i]
+                        if contact.givenName == "" || contact.familyName == "" || contact.phoneNumbers.isEmpty {
+                            containerResults.remove(at: i)
+                            continue
+                        }
+                        i = i + 1
+                    }
                     self.contacts?.append(contentsOf: containerResults)
                 } catch {
                     print("Error fetching results for container")
@@ -53,7 +62,16 @@ class ContactsTableViewController: UITableViewController {
                         let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
                         
                         do {
-                            let containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor])
+                            var containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor])
+                            var i = 0
+                            while (i < containerResults.count) {
+                                let contact = containerResults[i]
+                                if contact.givenName == "" || contact.familyName == "" || contact.phoneNumbers.isEmpty {
+                                    containerResults.remove(at: i)
+                                    continue
+                                }
+                                i = i + 1
+                            }
                             self.contacts?.append(contentsOf: containerResults)
                         } catch {
                             print("Error fetching results for container")
@@ -107,6 +125,10 @@ class ContactsTableViewController: UITableViewController {
         cell.detailTextLabel?.text = number
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
     func showAlert(message : String) {

@@ -13,6 +13,13 @@ import ContactsUI
 class DetailTableViewController: UITableViewController {
     
     var parentController : NewAlarmViewController!
+    
+    @IBOutlet weak var alarmName: UILabel!
+    @IBOutlet weak var alarmTime: UILabel!
+    @IBOutlet weak var alarmSnooze: UISwitch!
+    @IBOutlet weak var alarmSound: UILabel!
+    @IBOutlet weak var alarmContact: UILabel!
+    @IBOutlet weak var alarmTextTime: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +30,9 @@ class DetailTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    @IBAction func textTimeIncremented(_ sender: Any, forEvent event: UIEvent) {
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
