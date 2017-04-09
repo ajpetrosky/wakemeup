@@ -20,6 +20,8 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var alarmSound: UILabel!
     @IBOutlet weak var alarmContact: UILabel!
     @IBOutlet weak var alarmTextTime: UILabel!
+    
+    var contactNumber : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +48,8 @@ class DetailTableViewController: UITableViewController {
         let row = indexPath.row
         let cell = tableView.cellForRow(at: indexPath)
         if row == 0 {
-            changeNameAlert()
             cell?.isSelected = false
+            changeNameAlert()
         } else if row == 1 {
             cell?.isSelected = false
             parentController.performSegue(withIdentifier: "selectTimeSegue", sender: parentController)

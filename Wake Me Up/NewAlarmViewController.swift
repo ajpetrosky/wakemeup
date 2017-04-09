@@ -18,7 +18,6 @@ class NewAlarmViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func saveAlarm(_ sender: Any) {
@@ -27,13 +26,14 @@ class NewAlarmViewController: UIViewController {
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "detailsSegue" {
+        let id = segue.identifier
+        if id == "detailsSegue" {
             embeddedDetailViewController = segue.destination as! DetailTableViewController
             embeddedDetailViewController.parentController = self
+        } else if id == "selectContactSegue" {
+            let dest = segue.destination as! ContactsTableViewController
+            dest.detailsController = self.embeddedDetailViewController
         }
     }
 
