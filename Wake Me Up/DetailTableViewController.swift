@@ -28,6 +28,9 @@ class DetailTableViewController: UITableViewController {
     }
 
     @IBAction func textTimeIncremented(_ sender: Any, forEvent event: UIEvent) {
+        let stepper = sender as! UIStepper
+        let value = Int(stepper.value)
+        alarmTextTime.text = String(value)
     }
     
     override func didReceiveMemoryWarning() {

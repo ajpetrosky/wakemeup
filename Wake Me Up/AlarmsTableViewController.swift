@@ -106,6 +106,9 @@ class AlarmsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editAlarmSegue" {
             let dest = segue.destination as! NewAlarmViewController
+            let backItem = UIBarButtonItem()
+            backItem.title = "Cancel"
+            navigationItem.backBarButtonItem = backItem
             dest.rootController = self
             if newAlarm {
                 dest.navigationItem.title = "Add New Alarm"
