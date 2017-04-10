@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class NewAlarmViewController: UIViewController {
     
     private var embeddedDetailViewController : DetailTableViewController!
+    var rootController : AlarmsTableViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +23,58 @@ class NewAlarmViewController: UIViewController {
     }
     
     @IBAction func saveAlarm(_ sender: Any) {
-        
+        if embeddedDetailViewController.alarmName.text == "" || embeddedDetailViewController.alarmTime.text == "" {
+            showAlert()
+            return
+        }
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let managedContext = appDelegate.persistentContainer.viewContext
+            if self.rootController.newAlarm {
+                let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
+                let alarm = NSManagedObject(entity: entity, insertInto: managedContext)
+                setUpAlarm(alarm: alarm)
+                try? managedContext.save()
+                self.rootController.alarms?.append(alarm)
+                self.rootController.tableView.reloadData()
+            } else {
+                var alarm = self.rootController.alarms?[self.rootController.curAlarm]
+                self.rootController.alarms?.remove(at: self.rootController.curAlarm)
+                managedContext.delete(alarm!)
+                let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
+                alarm = NSManagedObject(entity: entity, insertInto: managedContext)
+                setUpAlarm(alarm: alarm!)
+                try? managedContext.save()
+                self.rootController.alarms?.append(alarm!)
+                self.rootController.tableView.reloadData()
+            }
+        } else {
+            return
+        }
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    func setUpAlarm(alarm : NSManagedObject) {
+        alarm.setValue(embeddedDetailViewController.alarmName.text!, forKeyPath: "name")
+        if let number = embeddedDetailViewController.contactNumber {
+            alarm.setValue(number, forKeyPath: "contactNumber")
+            alarm.setValue(embeddedDetailViewController.alarmContact.text!, forKeyPath: "textContact")
+        } else {
+            alarm.setValue("", forKeyPath: "contactNumber")
+            alarm.setValue("None", forKeyPath: "textContact")
+        }
+        alarm.setValue(embeddedDetailViewController.alarmSound.text!, forKeyPath: "sound")
+        alarm.setValue(embeddedDetailViewController.alarmTextTime.text!, forKeyPath: "textAfter")
+        alarm.setValue(embeddedDetailViewController.alarmTime.text!, forKeyPath: "time")
+        alarm.setValue("Not set", forKeyPath: "timeRepeat")
+        alarm.setValue(embeddedDetailViewController.alarmSnooze.isOn, forKeyPath: "snooze")
+        alarm.setValue(true, forKeyPath: "enabled")
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "Incomplete", message: "Either the name or time of the alarm has not been set", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     // MARK: - Navigation
 

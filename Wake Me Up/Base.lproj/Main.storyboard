@@ -73,43 +73,63 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmCell" rowHeight="115" id="WTC-uO-BzF">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmCell" rowHeight="115" id="WTC-uO-BzF" customClass="AlarmTableViewCell" customModule="Wake_Me_Up" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WTC-uO-BzF" id="qWt-xJ-h6D">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="114.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dr-wo-xFe">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dr-wo-xFe">
                                             <rect key="frame" x="8" y="8" width="66" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zw-J2-GGk">
-                                            <rect key="frame" x="8" y="48" width="80" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zw-J2-GGk">
+                                            <rect key="frame" x="8" y="48" width="43" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Text Backup: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htm-Zl-HDn">
-                                            <rect key="frame" x="8" y="79" width="103.5" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htm-Zl-HDn">
+                                            <rect key="frame" x="8" y="79" width="70" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcq-Sv-OO1">
                                             <rect key="frame" x="288" y="42" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="toggleAlarm:" destination="gCd-GB-Wb8" eventType="valueChanged" id="q7d-D9-HbM"/>
+                                            </connections>
                                         </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bph-ET-Nf8">
+                                            <rect key="frame" x="78" y="79" width="58.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="8Dr-wo-xFe" firstAttribute="leading" secondItem="qWt-xJ-h6D" secondAttribute="leadingMargin" id="Hkn-aT-sAr"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fcq-Sv-OO1" secondAttribute="trailing" constant="30" id="Hzr-gW-KSB"/>
+                                        <constraint firstItem="8zw-J2-GGk" firstAttribute="leading" secondItem="qWt-xJ-h6D" secondAttribute="leadingMargin" id="cOW-Ya-CUX"/>
+                                        <constraint firstItem="8zw-J2-GGk" firstAttribute="top" secondItem="8Dr-wo-xFe" secondAttribute="bottom" constant="10" id="ddv-qZ-Yc0"/>
+                                        <constraint firstItem="8Dr-wo-xFe" firstAttribute="top" secondItem="qWt-xJ-h6D" secondAttribute="topMargin" id="ewV-P7-BQA"/>
+                                        <constraint firstItem="htm-Zl-HDn" firstAttribute="top" secondItem="8zw-J2-GGk" secondAttribute="bottom" constant="10" id="hw3-su-CkZ"/>
                                         <constraint firstItem="fcq-Sv-OO1" firstAttribute="centerY" secondItem="qWt-xJ-h6D" secondAttribute="centerY" id="lH1-jj-Ud7"/>
+                                        <constraint firstItem="Bph-ET-Nf8" firstAttribute="top" secondItem="qWt-xJ-h6D" secondAttribute="topMargin" constant="71" id="lKe-Iy-xs8"/>
+                                        <constraint firstItem="htm-Zl-HDn" firstAttribute="leading" secondItem="qWt-xJ-h6D" secondAttribute="leadingMargin" id="y1P-On-mNk"/>
+                                        <constraint firstItem="Bph-ET-Nf8" firstAttribute="leading" secondItem="htm-Zl-HDn" secondAttribute="trailing" id="yN2-M4-yfZ"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="alarmContact" destination="Bph-ET-Nf8" id="jwR-Cg-HF7"/>
+                                    <outlet property="alarmEnable" destination="fcq-Sv-OO1" id="TyD-tW-v2M"/>
+                                    <outlet property="alarmName" destination="8Dr-wo-xFe" id="VOE-Ql-n7r"/>
+                                    <outlet property="alarmTime" destination="8zw-J2-GGk" id="HSh-6i-xJh"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
