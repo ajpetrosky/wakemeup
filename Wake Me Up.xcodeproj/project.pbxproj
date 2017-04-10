@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		271C390FF9495A4C4012CBE2 /* Pods_Wake_Me_Up.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA76625A1AC80044AAF5297D /* Pods_Wake_Me_Up.framework */; };
 		3A5AEE711E9AFFB4008C1192 /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AEE701E9AFFB4008C1192 /* AlarmTableViewCell.swift */; };
+		3AF6869C1E9C36BD00D4110B /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6869B1E9C36BD00D4110B /* Messaging.swift */; };
+		3AF6869E1E9C36DF00D4110B /* AlarmNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6869D1E9C36DF00D4110B /* AlarmNotifications.swift */; };
 		3AF6D0F61E995B110018B5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D0F51E995B110018B5A1 /* AppDelegate.swift */; };
 		3AF6D0FB1E995B110018B5A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6D0F91E995B110018B5A1 /* Main.storyboard */; };
 		3AF6D0FE1E995B110018B5A1 /* Wake_Me_Up.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D0FC1E995B110018B5A1 /* Wake_Me_Up.xcdatamodeld */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		3A5AEE701E9AFFB4008C1192 /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
+		3AF6869B1E9C36BD00D4110B /* Messaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
+		3AF6869D1E9C36DF00D4110B /* AlarmNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmNotifications.swift; sourceTree = "<group>"; };
 		3AF6D0F21E995B110018B5A1 /* Wake Me Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wake Me Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF6D0F51E995B110018B5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AF6D0FA1E995B110018B5A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				3AF6D12C1E9AB30A0018B5A1 /* ContactsTableViewController.swift */,
 				3AF6D1301E9AD1EA0018B5A1 /* SoundViewController.swift */,
 				3AF6D12E1E9AD1880018B5A1 /* TimeViewController.swift */,
+				3AF6869B1E9C36BD00D4110B /* Messaging.swift */,
+				3AF6869D1E9C36DF00D4110B /* AlarmNotifications.swift */,
 				3AF6D0FF1E995B110018B5A1 /* Assets.xcassets */,
 				3AF6D1361E9AECD70018B5A1 /* AppIcon.appiconset */,
 				3AF6D0F91E995B110018B5A1 /* Main.storyboard */,
@@ -476,12 +482,14 @@
 			files = (
 				3AF6D1271E9972520018B5A1 /* NewAlarmViewController.swift in Sources */,
 				3AF6D12B1E9A9EA80018B5A1 /* DetailTableViewController.swift in Sources */,
+				3AF6869E1E9C36DF00D4110B /* AlarmNotifications.swift in Sources */,
 				3AF6D12D1E9AB30A0018B5A1 /* ContactsTableViewController.swift in Sources */,
 				3AF6D1291E9973270018B5A1 /* AlarmsTableViewController.swift in Sources */,
 				3AF6D1311E9AD1EA0018B5A1 /* SoundViewController.swift in Sources */,
 				3AF6D12F1E9AD1880018B5A1 /* TimeViewController.swift in Sources */,
 				3AF6D0F61E995B110018B5A1 /* AppDelegate.swift in Sources */,
 				3AF6D0FE1E995B110018B5A1 /* Wake_Me_Up.xcdatamodeld in Sources */,
+				3AF6869C1E9C36BD00D4110B /* Messaging.swift in Sources */,
 				3A5AEE711E9AFFB4008C1192 /* AlarmTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

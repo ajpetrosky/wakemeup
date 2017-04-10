@@ -64,8 +64,11 @@ class NewAlarmViewController: UIViewController {
         }
         alarm.setValue(embeddedDetailViewController.alarmSound.text!, forKeyPath: "sound")
         alarm.setValue(embeddedDetailViewController.alarmTextTime.text!, forKeyPath: "textAfter")
-        alarm.setValue(embeddedDetailViewController.alarmTime.text!, forKeyPath: "time")
-        alarm.setValue("Not set", forKeyPath: "timeRepeat")
+        var timeArray = embeddedDetailViewController.alarmTime.text!.components(separatedBy: ", ")
+        let time = timeArray[0]
+        let repeats = timeArray[1]
+        alarm.setValue(time, forKeyPath: "time")
+        alarm.setValue(repeats, forKeyPath: "timeRepeat")
         alarm.setValue(embeddedDetailViewController.alarmSnooze.isOn, forKeyPath: "snooze")
         alarm.setValue(true, forKeyPath: "enabled")
     }

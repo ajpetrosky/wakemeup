@@ -75,7 +75,7 @@ class AlarmsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmCell", for: indexPath) as! AlarmTableViewCell
         let alarm = alarms?[indexPath.row]
-        cell.alarmName?.text = alarm?.value(forKeyPath: "name") as? String
+        cell.alarmName?.text = (alarm?.value(forKeyPath: "name") as? String)! + ", " + (alarm?.value(forKeyPath: "timeRepeat") as? String)!
         cell.alarmContact?.text = alarm?.value(forKeyPath: "textContact") as? String
         cell.alarmTime?.text = alarm?.value(forKeyPath: "time") as? String
         cell.alarmEnable.isOn = (alarm?.value(forKeyPath: "enabled") as? Bool)!
