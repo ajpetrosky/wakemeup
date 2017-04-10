@@ -16,6 +16,21 @@ class NewAlarmViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !self.rootController.newAlarm {
+            let alarm = self.rootController.alarms?[self.rootController.curAlarm]
+            embeddedDetailViewController.alarmName.text = alarm?.value(forKey: "name") as? String
+            let time = alarm?.value(forKey: "time") as! String
+            let repeats = alarm?.value(forKey: "timeRepeat") as! String
+            if repeats == "" {
+                embeddedDetailViewController.alarmTime.text = time
+            } else {
+                embeddedDetailViewController.alarmTime.text = time + ", " + repeats
+            }
+            embeddedDetailViewController.alarmSnooze.isOn = (alarm?.value(forKey: "snooze") as? Bool)!
+            embeddedDetailViewController.alarmSound.text = alarm?.value(forKey: "sound") as? String
+            embeddedDetailViewController.alarmContact.text = alarm?.value(forKey: "textContact") as? String
+            embeddedDetailViewController.alarmTextTime.text = alarm?.value(forKey: "textAfter") as? String
+        }
     }
 
     override func didReceiveMemoryWarning() {
