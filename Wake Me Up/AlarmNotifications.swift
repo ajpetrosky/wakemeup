@@ -35,12 +35,12 @@ class AlarmNotifications {
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: name, arguments: nil)
         content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr, arguments: nil)
-        let days = ["M", "T", "W", "R", "F", "Sat", "Sun"]
+        let days = ["Sun", "M", "T", "W", "R", "F", "Sat"]
         for i in 1...7 {
             if repeats == "" {
                 requestAlarm(minute: minute!, hour: hour!, content: content, weekday: 0, alarm: alarm)
             }
-            let day = days[i]
+            let day = days[i-1]
             if !repeats.contains(day) { continue }
             requestAlarm(minute: minute!, hour: hour!, content: content, weekday: i, alarm: alarm)
         }

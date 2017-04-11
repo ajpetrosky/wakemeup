@@ -19,7 +19,6 @@ class AlarmsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadAlarms()
-        AlarmNotifications.enableAlarmNotificationsFor(alarm: (alarms?[1])!)
     }
     
     func loadAlarms() {

@@ -46,29 +46,31 @@ class NewAlarmViewController: UIViewController {
             showAlert()
             return
         }
+        var alarm : NSManagedObject
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             let managedContext = appDelegate.persistentContainer.viewContext
             if self.rootController.newAlarm {
                 let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
-                var alarm = NSManagedObject(entity: entity, insertInto: managedContext)
+                alarm = NSManagedObject(entity: entity, insertInto: managedContext)
                 alarm = setUpAlarm(alarm: alarm)
                 try? managedContext.save()
                 self.rootController.alarms?.append(alarm)
                 self.rootController.tableView.reloadData()
             } else {
-                var alarm = self.rootController.alarms?[self.rootController.curAlarm]
+                alarm = (self.rootController.alarms?[self.rootController.curAlarm])!
                 self.rootController.alarms?.remove(at: self.rootController.curAlarm)
-                managedContext.delete(alarm!)
+                managedContext.delete(alarm)
                 let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
                 alarm = NSManagedObject(entity: entity, insertInto: managedContext)
-                alarm = setUpAlarm(alarm: alarm!)
+                alarm = setUpAlarm(alarm: alarm)
                 try? managedContext.save()
-                self.rootController.alarms?.append(alarm!)
+                self.rootController.alarms?.append(alarm)
                 self.rootController.tableView.reloadData()
             }
         } else {
             return
         }
+        AlarmNotifications.enableAlarmNotificationsFor(alarm: alarm)
         _ = self.navigationController?.popViewController(animated: true)
     }
     
