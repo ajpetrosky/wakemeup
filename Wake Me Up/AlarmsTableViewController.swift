@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class AlarmsTableViewController: UITableViewController {
     
@@ -117,5 +118,4 @@ class AlarmsTableViewController: UITableViewController {
             }
         }
     }
-
 }

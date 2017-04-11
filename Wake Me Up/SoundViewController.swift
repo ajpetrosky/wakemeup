@@ -50,6 +50,9 @@ class SoundViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     @IBAction func doneSelectingSound(_ sender: Any) {
+        if selected == nil {
+            selected = "Classic"
+        }
         detailsController.alarmSound.text = selected
         _ = self.navigationController?.popViewController(animated: true)
     }
