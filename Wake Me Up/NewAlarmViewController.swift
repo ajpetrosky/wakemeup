@@ -20,11 +20,15 @@ class NewAlarmViewController: UIViewController {
             let alarm = self.rootController.alarms?[self.rootController.curAlarm]
             embeddedDetailViewController.alarmName.text = alarm?.value(forKey: "name") as? String
             let time = alarm?.value(forKey: "time") as! String
-            let repeats = alarm?.value(forKey: "timeRepeat") as! String
-            if repeats == "" {
-                embeddedDetailViewController.alarmTime.text = time
+            let repeats = alarm?.value(forKey: "timeRepeat") as? String
+            if let r = repeats {
+                if r == "" {
+                    embeddedDetailViewController.alarmTime.text = time
+                } else {
+                    embeddedDetailViewController.alarmTime.text = time + ", " + r
+                }
             } else {
-                embeddedDetailViewController.alarmTime.text = time + ", " + repeats
+                embeddedDetailViewController.alarmTime.text = time
             }
             embeddedDetailViewController.alarmSnooze.isOn = (alarm?.value(forKey: "snooze") as? Bool)!
             embeddedDetailViewController.alarmSound.text = alarm?.value(forKey: "sound") as? String
@@ -46,8 +50,8 @@ class NewAlarmViewController: UIViewController {
             let managedContext = appDelegate.persistentContainer.viewContext
             if self.rootController.newAlarm {
                 let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
-                let alarm = NSManagedObject(entity: entity, insertInto: managedContext)
-                setUpAlarm(alarm: alarm)
+                var alarm = NSManagedObject(entity: entity, insertInto: managedContext)
+                alarm = setUpAlarm(alarm: alarm)
                 try? managedContext.save()
                 self.rootController.alarms?.append(alarm)
                 self.rootController.tableView.reloadData()
@@ -57,7 +61,7 @@ class NewAlarmViewController: UIViewController {
                 managedContext.delete(alarm!)
                 let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
                 alarm = NSManagedObject(entity: entity, insertInto: managedContext)
-                setUpAlarm(alarm: alarm!)
+                alarm = setUpAlarm(alarm: alarm!)
                 try? managedContext.save()
                 self.rootController.alarms?.append(alarm!)
                 self.rootController.tableView.reloadData()
@@ -68,7 +72,7 @@ class NewAlarmViewController: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func setUpAlarm(alarm : NSManagedObject) {
+    func setUpAlarm(alarm : NSManagedObject) -> NSManagedObject {
         alarm.setValue(embeddedDetailViewController.alarmName.text!, forKeyPath: "name")
         if let number = embeddedDetailViewController.contactNumber {
             alarm.setValue(number, forKeyPath: "contactNumber")
@@ -81,11 +85,16 @@ class NewAlarmViewController: UIViewController {
         alarm.setValue(embeddedDetailViewController.alarmTextTime.text!, forKeyPath: "textAfter")
         var timeArray = embeddedDetailViewController.alarmTime.text!.components(separatedBy: ", ")
         let time = timeArray[0]
-        let repeats = timeArray[1]
         alarm.setValue(time, forKeyPath: "time")
-        alarm.setValue(repeats, forKeyPath: "timeRepeat")
+        if timeArray.count == 2 {
+            let repeats = timeArray[1]
+            alarm.setValue(repeats, forKeyPath: "timeRepeat")
+        } else {
+            alarm.setValue("", forKeyPath: "timeRepeat")
+        }
         alarm.setValue(embeddedDetailViewController.alarmSnooze.isOn, forKeyPath: "snooze")
         alarm.setValue(true, forKeyPath: "enabled")
+        return alarm
     }
     
     func showAlert() {
