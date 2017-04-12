@@ -22,6 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UINavigationBar.appearance().isTranslucent = false
         let center = UNUserNotificationCenter.current()
         center.delegate = self
+        let snoozeAction = UNNotificationAction(identifier: "SNOOZE_ACTION",
+                                                title: "Snooze",
+                                                options: UNNotificationActionOptions(rawValue: 0))
+        let genCategory = UNNotificationCategory(identifier: "SNOOZABLE",
+                                                     actions: [],
+                                                     intentIdentifiers: [],
+                                                     options: .customDismissAction)
+        let snoozeCategory = UNNotificationCategory(identifier: "GENERAL",
+                                                 actions: [snoozeAction],
+                                                 intentIdentifiers: [],
+                                                 options: .customDismissAction)
+        center.setNotificationCategories([genCategory, snoozeCategory])
+        
         center.requestAuthorization(options: [.alert]) { (granted, error) in
             if let theError = error {
                 print(theError.localizedDescription)
@@ -34,15 +47,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from applicationDidFinishLaunching:.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
-        print(getAlarm(notification: response.notification))
-        
+        let alarm = getAlarm(notification: response.notification)
+        let action = response.actionIdentifier
+        print(action)
+        if action == UNNotificationDismissActionIdentifier || action == UNNotificationDefaultActionIdentifier {
+            let repeats = alarm.value(forKeyPath: "timeRepeat") as! String
+            if repeats == "" {
+                alarm.setValue(false, forKey: "enabled")
+                saveContext()
+            }
+            
+            let contactName = alarm.value(forKeyPath: "textContact") as! String
+            if contactName !=  "None" {
+                var contactNumber = alarm.value(forKeyPath: "contactNumber") as! String
+                contactNumber = "+1" + contactNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
+                let textAfter = Double(alarm.value(forKeyPath: "textAfter") as! String)
+                DispatchQueue.main.asyncAfter(deadline: .now() + textAfter!) {
+                    Messaging.sendText(contactName: contactName, contactNumber: contactNumber)
+                }
+            }
+        } else if action == "SNOOZE_ACTION" {
+            AlarmNotifications.setSnoozeNotification(alarm: alarm)
+        }
         completionHandler()
     }
     
     func getAlarm(notification : UNNotification) -> NSManagedObject {
         let managedContext = self.persistentContainer.viewContext
         let startIndex = notification.request.identifier.startIndex
-        let index = notification.request.identifier.index(startIndex, offsetBy: notification.request.identifier.characters.count - 2)
+        let index = notification.request.identifier.index(startIndex, offsetBy: notification.request.identifier.characters.count - 1)
         let alarmId = notification.request.identifier.substring(to: index)
         let id = persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: URL(string: alarmId)!)
         let alarm = managedContext.object(with: id!)

@@ -61,8 +61,18 @@ class NewAlarmViewController: UIViewController {
                 self.rootController.alarms?.remove(at: self.rootController.curAlarm)
                 AlarmNotifications.disableAlarmNotificationsFor(alarm: alarm)
                 managedContext.delete(alarm)
+                var contactName = ""
+                var contactNumber = ""
+                if embeddedDetailViewController.contactNumber == nil {
+                    contactName = alarm.value(forKeyPath: "textContact") as! String
+                    contactNumber = alarm.value(forKeyPath: "contactNumber") as! String
+                }
                 let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
                 alarm = NSManagedObject(entity: entity, insertInto: managedContext)
+                if embeddedDetailViewController.contactNumber == nil {
+                    alarm.setValue(contactNumber, forKeyPath: "contactNumber")
+                    alarm.setValue(contactName, forKeyPath: "textContact")
+                }
                 alarm = setUpAlarm(alarm: alarm)
                 try? managedContext.save()
                 self.rootController.alarms?.append(alarm)
@@ -80,7 +90,7 @@ class NewAlarmViewController: UIViewController {
         if let number = embeddedDetailViewController.contactNumber {
             alarm.setValue(number, forKeyPath: "contactNumber")
             alarm.setValue(embeddedDetailViewController.alarmContact.text!, forKeyPath: "textContact")
-        } else {
+        } else if self.rootController.newAlarm {
             alarm.setValue("", forKeyPath: "contactNumber")
             alarm.setValue("None", forKeyPath: "textContact")
         }

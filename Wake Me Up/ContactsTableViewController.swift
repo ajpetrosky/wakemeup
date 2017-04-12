@@ -117,6 +117,7 @@ class ContactsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
         if indexPath.row == 0 {
             cell.textLabel?.text = "None"
+            cell.detailTextLabel?.text = ""
             return cell
         }
         let contact = contacts?[indexPath.row]

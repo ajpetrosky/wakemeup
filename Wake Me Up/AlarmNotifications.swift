@@ -33,6 +33,12 @@ class AlarmNotifications {
         }
         
         let content = UNMutableNotificationContent()
+        let snooze = alarm.value(forKey: "snooze") as! Bool
+        if snooze {
+            content.categoryIdentifier = "SNOOZABLE"
+        } else {
+            content.categoryIdentifier = "GENERAL"
+        }
         content.title = NSString.localizedUserNotificationString(forKey: name, arguments: nil)
         content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr, arguments: nil)
         let days = ["Sun", "M", "T", "W", "R", "F", "Sat"]
@@ -61,14 +67,31 @@ class AlarmNotifications {
         let days = ["Sun", "M", "T", "W", "R", "F", "Sat"]
         for i in 1...7 {
             if repeats == "" {
-                removals.append(alarm.objectID.description + String(0))
+                removals.append(alarm.objectID.uriRepresentation().absoluteString + String(0))
                 break
             }
             let day = days[i-1]
             if !repeats.contains(day) { continue }
-            removals.append(alarm.objectID.description + String(i))
+            removals.append(alarm.objectID.uriRepresentation().absoluteString + String(i))
         }
         center.removePendingNotificationRequests(withIdentifiers: removals)
+    }
+    
+    static func setSnoozeNotification(alarm : NSManagedObject) {
+        let name = "Snoozed " + (alarm.value(forKey: "name") as! String)
+        let timeStr = alarm.value(forKey: "time") as! String
+        let content = UNMutableNotificationContent()
+        content.categoryIdentifier = "SNOOZABLE"
+        content.title = NSString.localizedUserNotificationString(forKey: name, arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr, arguments: nil)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 540, repeats: false)
+        let request = UNNotificationRequest(identifier: alarm.objectID.uriRepresentation().absoluteString + "snooze", content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error : Error?) in
+            if let theError = error {
+                print(theError.localizedDescription)
+            }
+        }
     }
     
     private static func requestAlarm(minute : Int, hour : Int, content : UNNotificationContent, weekday : Int, alarm : NSManagedObject) {
