@@ -32,15 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let awakeAction = UNNotificationAction(identifier: "AWAKE_ACTION",
                                                 title: "Awake?",
                                                 options: UNNotificationActionOptions(rawValue: 0))
-        let awakeCategory = UNNotificationCategory(identifier: "AWAKE",
-                                                 actions: [awakeAction],
-                                                 intentIdentifiers: [],
-                                                 options: .customDismissAction)
         let snoozeCategory = UNNotificationCategory(identifier: "GENERAL",
                                                  actions: [],
                                                  intentIdentifiers: [],
                                                  options: .customDismissAction)
-        center.setNotificationCategories([genCategory, snoozeCategory, awakeCategory])
+        center.setNotificationCategories([genCategory, snoozeCategory])
         
         center.requestAuthorization(options: [.alert]) { (granted, error) in
             if let theError = error {
