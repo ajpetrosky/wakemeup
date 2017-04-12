@@ -69,9 +69,6 @@ class AlarmNotifications {
             removals.append(alarm.objectID.description + String(i))
         }
         center.removePendingNotificationRequests(withIdentifiers: removals)
-        center.getPendingNotificationRequests(completionHandler: { request in
-            print(request)
-        })
     }
     
     private static func requestAlarm(minute : Int, hour : Int, content : UNNotificationContent, weekday : Int, alarm : NSManagedObject) {
@@ -85,7 +82,7 @@ class AlarmNotifications {
             dateInfo.weekday = weekday
             trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: true)
         }
-        let request = UNNotificationRequest(identifier: alarm.objectID.description + String(weekday), content: content,   trigger: trigger)
+        let request = UNNotificationRequest(identifier: alarm.objectID.uriRepresentation().absoluteString + String(weekday), content: content,   trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in
             if let theError = error {
