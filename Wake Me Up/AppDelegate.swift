@@ -26,14 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                 title: "Snooze",
                                                 options: UNNotificationActionOptions(rawValue: 0))
         let genCategory = UNNotificationCategory(identifier: "SNOOZABLE",
-                                                     actions: [],
+                                                     actions: [snoozeAction],
                                                      intentIdentifiers: [],
                                                      options: .customDismissAction)
-        let snoozeCategory = UNNotificationCategory(identifier: "GENERAL",
-                                                 actions: [snoozeAction],
+        let awakeAction = UNNotificationAction(identifier: "AWAKE_ACTION",
+                                                title: "Awake?",
+                                                options: UNNotificationActionOptions(rawValue: 0))
+        let awakeCategory = UNNotificationCategory(identifier: "AWAKE",
+                                                 actions: [awakeAction],
                                                  intentIdentifiers: [],
                                                  options: .customDismissAction)
-        center.setNotificationCategories([genCategory, snoozeCategory])
+        let snoozeCategory = UNNotificationCategory(identifier: "GENERAL",
+                                                 actions: [],
+                                                 intentIdentifiers: [],
+                                                 options: .customDismissAction)
+        center.setNotificationCategories([genCategory, snoozeCategory, awakeCategory])
         
         center.requestAuthorization(options: [.alert]) { (granted, error) in
             if let theError = error {
@@ -47,23 +54,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from applicationDidFinishLaunching:.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
+        let id = response.notification.request.identifier
+        if id == "check" {
+            Messaging.dequeueText()
+            completionHandler()
+            return
+        }
+        
         let alarm = getAlarm(notification: response.notification)
         let action = response.actionIdentifier
-        print(action)
         if action == UNNotificationDismissActionIdentifier || action == UNNotificationDefaultActionIdentifier {
             let repeats = alarm.value(forKeyPath: "timeRepeat") as! String
             if repeats == "" {
                 alarm.setValue(false, forKey: "enabled")
                 saveContext()
             }
-            
-            let contactName = alarm.value(forKeyPath: "textContact") as! String
-            if contactName !=  "None" {
-                var contactNumber = alarm.value(forKeyPath: "contactNumber") as! String
-                contactNumber = "+1" + contactNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
-                let textAfter = Double(alarm.value(forKeyPath: "textAfter") as! String)
-                DispatchQueue.main.asyncAfter(deadline: .now() + textAfter!) {
-                    Messaging.sendText(contactName: contactName, contactNumber: contactNumber)
+            /////////CHANGE TIME FOR ACTUAL APP, BUT MAKE SHORT FOR DEMOS
+            DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
+                let contactName = alarm.value(forKeyPath: "textContact") as! String
+                if contactName !=  "None" {
+                    AlarmNotifications.checkAwakeNotification()
+                    var contactNumber = alarm.value(forKeyPath: "contactNumber") as! String
+                    contactNumber = "+1" + contactNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
+                    let textAfter = Double(alarm.value(forKeyPath: "textAfter") as! String)
+                    Messaging.queueText(contactName: contactName, contactNumber: contactNumber)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + textAfter!) {
+                        Messaging.sendQueuedText()
+                    }
                 }
             }
         } else if action == "SNOOZE_ACTION" {

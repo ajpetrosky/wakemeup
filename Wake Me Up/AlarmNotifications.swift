@@ -94,6 +94,21 @@ class AlarmNotifications {
         }
     }
     
+    static func checkAwakeNotification() {
+        let content = UNMutableNotificationContent()
+        content.categoryIdentifier = "GENERAL"
+        content.title = NSString.localizedUserNotificationString(forKey: "Awake?", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Are you awake? Dismiss or open to notification to confirm.", arguments: nil)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+        let request = UNNotificationRequest(identifier: "check", content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error : Error?) in
+            if let theError = error {
+                print(theError.localizedDescription)
+            }
+        }
+    }
+    
     private static func requestAlarm(minute : Int, hour : Int, content : UNNotificationContent, weekday : Int, alarm : NSManagedObject) {
         var dateInfo = DateComponents()
         dateInfo.minute = minute
