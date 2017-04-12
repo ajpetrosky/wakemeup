@@ -39,6 +39,7 @@ class AlarmNotifications {
         for i in 1...7 {
             if repeats == "" {
                 requestAlarm(minute: minute!, hour: hour!, content: content, weekday: 0, alarm: alarm)
+                break
             }
             let day = days[i-1]
             if !repeats.contains(day) { continue }
@@ -48,7 +49,29 @@ class AlarmNotifications {
     }
     
     static func disableAlarmNotificationsFor(alarm : NSManagedObject) {
-        
+        let repeatsOpt = (alarm.value(forKeyPath: "timeRepeat") as? String)
+        var repeats : String
+        if let r = repeatsOpt {
+            repeats = r
+        } else {
+            repeats = ""
+        }
+        var removals : [String] = []
+        let center = UNUserNotificationCenter.current()
+        let days = ["Sun", "M", "T", "W", "R", "F", "Sat"]
+        for i in 1...7 {
+            if repeats == "" {
+                removals.append(alarm.objectID.description + String(0))
+                break
+            }
+            let day = days[i-1]
+            if !repeats.contains(day) { continue }
+            removals.append(alarm.objectID.description + String(i))
+        }
+        center.removePendingNotificationRequests(withIdentifiers: removals)
+        center.getPendingNotificationRequests(completionHandler: { request in
+            print(request)
+        })
     }
     
     private static func requestAlarm(minute : Int, hour : Int, content : UNNotificationContent, weekday : Int, alarm : NSManagedObject) {
@@ -62,7 +85,6 @@ class AlarmNotifications {
             dateInfo.weekday = weekday
             trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: true)
         }
-        print(dateInfo.description)
         let request = UNNotificationRequest(identifier: alarm.objectID.description + String(weekday), content: content,   trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in

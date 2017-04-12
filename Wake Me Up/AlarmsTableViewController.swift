@@ -46,6 +46,11 @@ class AlarmsTableViewController: UITableViewController {
                     if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                         alarm?.setValue(swit.isOn, forKey: "enabled")
                         appDelegate.saveContext()
+                        if swit.isOn {
+                            AlarmNotifications.enableAlarmNotificationsFor(alarm: alarm!)
+                        } else {
+                            AlarmNotifications.disableAlarmNotificationsFor(alarm: alarm!)
+                        }
                     }
                 }
             }
@@ -107,6 +112,7 @@ class AlarmsTableViewController: UITableViewController {
                 let managedContext = appDelegate.persistentContainer.viewContext
                 managedContext.delete(alarm!)
                 try? managedContext.save()
+                AlarmNotifications.disableAlarmNotificationsFor(alarm: alarm!)
             }
         }
     }

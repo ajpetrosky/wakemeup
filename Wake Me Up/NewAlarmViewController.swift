@@ -59,6 +59,7 @@ class NewAlarmViewController: UIViewController {
             } else {
                 alarm = (self.rootController.alarms?[self.rootController.curAlarm])!
                 self.rootController.alarms?.remove(at: self.rootController.curAlarm)
+                AlarmNotifications.disableAlarmNotificationsFor(alarm: alarm)
                 managedContext.delete(alarm)
                 let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: managedContext)!
                 alarm = NSManagedObject(entity: entity, insertInto: managedContext)
