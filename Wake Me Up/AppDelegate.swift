@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         UINavigationBar.appearance().barTintColor = UIColor(red: 153/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().isTranslucent = false
         let center = UNUserNotificationCenter.current()
@@ -25,14 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let snoozeAction = UNNotificationAction(identifier: "SNOOZE_ACTION",
                                                 title: "Snooze",
                                                 options: UNNotificationActionOptions(rawValue: 0))
-        let genCategory = UNNotificationCategory(identifier: "SNOOZABLE",
+        let snoozeCategory = UNNotificationCategory(identifier: "SNOOZABLE",
                                                      actions: [snoozeAction],
                                                      intentIdentifiers: [],
                                                      options: .customDismissAction)
-        let awakeAction = UNNotificationAction(identifier: "AWAKE_ACTION",
-                                                title: "Awake?",
-                                                options: UNNotificationActionOptions(rawValue: 0))
-        let snoozeCategory = UNNotificationCategory(identifier: "GENERAL",
+        let genCategory = UNNotificationCategory(identifier: "GENERAL",
                                                  actions: [],
                                                  intentIdentifiers: [],
                                                  options: .customDismissAction)
@@ -59,28 +55,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let alarm = getAlarm(notification: response.notification)
         let action = response.actionIdentifier
-        if action == UNNotificationDismissActionIdentifier || action == UNNotificationDefaultActionIdentifier {
+        if action == UNNotificationDefaultActionIdentifier {
+            
             let repeats = alarm.value(forKeyPath: "timeRepeat") as! String
             if repeats == "" {
                 alarm.setValue(false, forKey: "enabled")
                 saveContext()
             }
+            
             /////////CHANGE TIME FOR ACTUAL APP, BUT MAKE SHORT FOR DEMOS
-            DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
-                let contactName = alarm.value(forKeyPath: "textContact") as! String
-                if contactName !=  "None" {
-                    AlarmNotifications.checkAwakeNotification()
-                    var contactNumber = alarm.value(forKeyPath: "contactNumber") as! String
-                    contactNumber = "+1" + contactNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
-                    let textAfter = Double(alarm.value(forKeyPath: "textAfter") as! String)
-                    Messaging.queueText(contactName: contactName, contactNumber: contactNumber)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + textAfter!) {
-                        Messaging.sendQueuedText()
-                    }
+            let contactName = alarm.value(forKeyPath: "textContact") as! String
+            if contactName !=  "None" {
+                let timeTillCheck = 10.0
+                AlarmNotifications.checkAwakeNotification(time: timeTillCheck)
+                var contactNumber = alarm.value(forKeyPath: "contactNumber") as! String
+                contactNumber = "+1" + contactNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
+                let textAfter = Double(alarm.value(forKeyPath: "textAfter") as! String)
+                let delay = (textAfter! * 60.0) + timeTillCheck
+                Messaging.queueText(contactName: contactName, contactNumber: contactNumber, delay: delay)
+                Messaging.sendQueuedText()
+            }
+            
+        } else if action == UNNotificationDismissActionIdentifier {
+            let snooze = alarm.value(forKey: "snooze") as! Bool
+            if snooze {
+                AlarmNotifications.setSnoozeNotification(alarm: alarm)
+            } else {
+                let repeats = alarm.value(forKeyPath: "timeRepeat") as! String
+                if repeats == "" {
+                    alarm.setValue(false, forKey: "enabled")
+                    saveContext()
                 }
             }
-        } else if action == "SNOOZE_ACTION" {
-            AlarmNotifications.setSnoozeNotification(alarm: alarm)
         }
         completionHandler()
     }

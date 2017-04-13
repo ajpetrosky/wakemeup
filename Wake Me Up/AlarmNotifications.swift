@@ -94,12 +94,12 @@ class AlarmNotifications {
         }
     }
     
-    static func checkAwakeNotification() {
+    static func checkAwakeNotification(time : Double) {
         let content = UNMutableNotificationContent()
         content.categoryIdentifier = "GENERAL"
         content.title = NSString.localizedUserNotificationString(forKey: "Awake?", arguments: nil)
-        content.body = NSString.localizedUserNotificationString(forKey: "Are you awake? Dismiss or open to notification to confirm.", arguments: nil)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+        content.body = NSString.localizedUserNotificationString(forKey: "Are you awake? Open this notification to confirm.", arguments: nil)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: time, repeats: false)
         let request = UNNotificationRequest(identifier: "check", content: content, trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in
