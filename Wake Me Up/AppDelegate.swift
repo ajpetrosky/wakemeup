@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
         let id = response.notification.request.identifier
         if id == "check" {
-            Messaging.dequeueText()
+            Messaging.cancelText()
             completionHandler()
             return
         }
@@ -72,8 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 contactNumber = "+1" + contactNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
                 let textAfter = Double(alarm.value(forKeyPath: "textAfter") as! String)
                 let delay = (textAfter! * 60.0) + timeTillCheck
-                Messaging.queueText(contactName: contactName, contactNumber: contactNumber, delay: delay)
-                Messaging.sendQueuedText()
+                Messaging.sendText(contactName: contactName, contactNumber: contactNumber, delay: delay)
             }
             
         } else if action == UNNotificationDismissActionIdentifier {

@@ -131,6 +131,10 @@ class AlarmsTableViewController: UITableViewController {
             } else {
                 dest.navigationItem.title = "Edit Alarm"
             }
+        } else {
+            let backItem = UIBarButtonItem()
+            backItem.title = "My Alarms"
+            navigationItem.backBarButtonItem = backItem
         }
     }
 }

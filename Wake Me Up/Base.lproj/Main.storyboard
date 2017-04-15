@@ -22,8 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explain how the app works" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkW-O7-e0f">
-                                <rect key="frame" x="36" y="114" width="303" height="388"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure to have your volume turned up loud enough so you will wake up to you alarm." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkW-O7-e0f">
+                                <rect key="frame" x="36" y="114" width="303" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -43,17 +43,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember to set your backup contact to someone you know will be awake when your alarm goes off!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okK-Ur-mTa">
+                                <rect key="frame" x="36" y="185" width="303" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RkW-O7-e0f" firstAttribute="top" secondItem="Rgt-aI-s9a" secondAttribute="bottom" constant="50" id="5u0-pM-ZEg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Y9l-5j-Hyz" secondAttribute="trailing" constant="20" id="68q-Rn-dDU"/>
                             <constraint firstItem="RkW-O7-e0f" firstAttribute="leading" secondItem="bJ1-ez-fej" secondAttribute="leadingMargin" constant="20" id="9Li-Ud-2um"/>
-                            <constraint firstItem="NGk-8V-BuD" firstAttribute="top" secondItem="RkW-O7-e0f" secondAttribute="bottom" constant="10" id="Dmc-7l-3r5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NGk-8V-BuD" secondAttribute="trailing" constant="20" id="GSb-hf-oP9"/>
                             <constraint firstItem="Y9l-5j-Hyz" firstAttribute="top" secondItem="NGk-8V-BuD" secondAttribute="bottom" constant="25" id="Omp-84-GuL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="okK-Ur-mTa" secondAttribute="trailing" constant="20" id="V1E-Kw-CAr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RkW-O7-e0f" secondAttribute="trailing" constant="20" id="XOT-ns-qt5"/>
                             <constraint firstItem="NGk-8V-BuD" firstAttribute="leading" secondItem="bJ1-ez-fej" secondAttribute="leadingMargin" constant="20" id="bzm-dW-gsb"/>
+                            <constraint firstItem="okK-Ur-mTa" firstAttribute="top" secondItem="RkW-O7-e0f" secondAttribute="bottom" constant="10" id="fwp-p9-z6w"/>
+                            <constraint firstItem="okK-Ur-mTa" firstAttribute="leading" secondItem="bJ1-ez-fej" secondAttribute="leadingMargin" constant="20" id="gS7-UF-B0C"/>
                             <constraint firstItem="Y9l-5j-Hyz" firstAttribute="leading" secondItem="bJ1-ez-fej" secondAttribute="leadingMargin" constant="20" id="h2J-u9-eqx"/>
                             <constraint firstItem="6j1-2y-Utu" firstAttribute="top" secondItem="NGk-8V-BuD" secondAttribute="bottom" constant="100" id="hUi-vE-AXv"/>
                         </constraints>
