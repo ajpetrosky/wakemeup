@@ -18,6 +18,39 @@ class TimeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         repeatTable.dataSource = self
         repeatTable.delegate = self
+        let timeArray = detailsController.alarmTime.text?.components(separatedBy: ", ")
+        if timeArray?.count == 2 {
+            let repeats = timeArray?[1]
+            repeatTable.reloadData()
+            if repeats!.contains("M") {
+                let cell = self.repeatTable.cellForRow(at: IndexPath(row: 0, section: 0))
+                cell?.accessoryType = .checkmark
+            }
+            if repeats!.contains("T") {
+                let cell = self.repeatTable.cellForRow(at: IndexPath(row: 1, section: 0))
+                cell?.accessoryType = .checkmark
+            }
+            if repeats!.contains("W") {
+                let cell = self.repeatTable.cellForRow(at: IndexPath(row: 2, section: 0))
+                cell?.accessoryType = .checkmark
+            }
+            if repeats!.contains("R") {
+                let cell = self.repeatTable.cellForRow(at: IndexPath(row: 3, section: 0))
+                cell?.accessoryType = .checkmark
+            }
+            if repeats!.contains("F") {
+                let cell = self.repeatTable.cellForRow(at: IndexPath(row: 4, section: 0))
+                cell?.accessoryType = .checkmark
+            }
+            if repeats!.contains("Sat") {
+                let cell = self.repeatTable.cellForRow(at: IndexPath(row: 5, section: 0))
+                cell?.accessoryType = .checkmark
+            }
+            if repeats!.contains("Sun") {
+                let cell = self.repeatTable.cellForRow(at: IndexPath(row: 6, section: 0))
+                cell?.accessoryType = .checkmark
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

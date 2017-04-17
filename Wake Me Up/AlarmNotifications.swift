@@ -28,7 +28,7 @@ class AlarmNotifications {
         var hour = Int(time[0])
         let minArray = time[1].components(separatedBy: " ")
         let minute = Int(minArray[0])
-        if minArray[1] == "PM" {
+        if minArray[1] == "PM" && hour != 12 {
             hour = hour! + 12
         } else if minArray[1] == "AM" && hour == 12 {
             hour = 0;
@@ -38,11 +38,12 @@ class AlarmNotifications {
         let snooze = alarm.value(forKey: "snooze") as! Bool
         if snooze {
             content.categoryIdentifier = "SNOOZABLE"
+            content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off, dismmiss to snooze.", arguments: nil)
         } else {
             content.categoryIdentifier = "GENERAL"
+            content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off.", arguments: nil)
         }
         content.title = NSString.localizedUserNotificationString(forKey: name, arguments: nil)
-        content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off.", arguments: nil)
         content.sound = UNNotificationSound(named: "classic.caf")
         let days = ["Sun", "M", "T", "W", "R", "F", "Sat"]
         for i in 1...7 {
@@ -86,10 +87,10 @@ class AlarmNotifications {
         let content = UNMutableNotificationContent()
         content.categoryIdentifier = "SNOOZABLE"
         content.title = NSString.localizedUserNotificationString(forKey: name, arguments: nil)
-        content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off.", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off, dismiss to snooze.", arguments: nil)
         content.sound = UNNotificationSound(named: "classic.caf")
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 540, repeats: false)
-        let request = UNNotificationRequest(identifier: alarm.objectID.uriRepresentation().absoluteString + "snooze", content: content, trigger: trigger)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let request = UNNotificationRequest(identifier: alarm.objectID.uriRepresentation().absoluteString + "s", content: content, trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in
             if let theError = error {
