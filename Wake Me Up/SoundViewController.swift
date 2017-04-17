@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import AudioToolbox
+import AVFoundation
 
 class SoundViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var soundPicker: UIPickerView!
     var detailsController : DetailTableViewController!
-    let sounds = ["Classic", "Buzz", "Sunrise"]
+    let sounds = ["Classic"]
     var selected : String?
+    var player : AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,23 @@ class SoundViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     @IBAction func playSound(_ sender: Any) {
+        if let p = player {
+            if p.isPlaying {
+                p.stop()
+                return
+            }
+        }
+        
+        let url = Bundle.main.url(forResource: "classic", withExtension: "caf")!
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            
+            player.prepareToPlay()
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     @IBAction func doneSelectingSound(_ sender: Any) {

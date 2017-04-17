@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                  options: .customDismissAction)
         center.setNotificationCategories([genCategory, snoozeCategory])
         
-        center.requestAuthorization(options: [.alert]) { (granted, error) in
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             if let theError = error {
                 print(theError.localizedDescription)
             }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		271C390FF9495A4C4012CBE2 /* Pods_Wake_Me_Up.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA76625A1AC80044AAF5297D /* Pods_Wake_Me_Up.framework */; };
+		3A0772581EA5184F008825DD /* classic.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0772571EA5184F008825DD /* classic.caf */; };
 		3A5AEE711E9AFFB4008C1192 /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AEE701E9AFFB4008C1192 /* AlarmTableViewCell.swift */; };
 		3AF6869C1E9C36BD00D4110B /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6869B1E9C36BD00D4110B /* Messaging.swift */; };
 		3AF6869E1E9C36DF00D4110B /* AlarmNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6869D1E9C36DF00D4110B /* AlarmNotifications.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A0772571EA5184F008825DD /* classic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = classic.caf; path = ../classic.caf; sourceTree = "<group>"; };
 		3A5AEE701E9AFFB4008C1192 /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 		3AF6869B1E9C36BD00D4110B /* Messaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
 		3AF6869D1E9C36DF00D4110B /* AlarmNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmNotifications.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		3AF6D0F41E995B110018B5A1 /* Wake Me Up */ = {
 			isa = PBXGroup;
 			children = (
+				3A0772571EA5184F008825DD /* classic.caf */,
 				3AF6D0F51E995B110018B5A1 /* AppDelegate.swift */,
 				3AF6D1281E9973270018B5A1 /* AlarmsTableViewController.swift */,
 				3A5AEE701E9AFFB4008C1192 /* AlarmTableViewCell.swift */,
@@ -316,6 +319,7 @@
 			files = (
 				3AF6D1031E995B110018B5A1 /* LaunchScreen.storyboard in Resources */,
 				3AF6D1001E995B110018B5A1 /* Assets.xcassets in Resources */,
+				3A0772581EA5184F008825DD /* classic.caf in Resources */,
 				3AF6D1371E9AECD70018B5A1 /* AppIcon.appiconset in Resources */,
 				3AF6D0FB1E995B110018B5A1 /* Main.storyboard in Resources */,
 			);

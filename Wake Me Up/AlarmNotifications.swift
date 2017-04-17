@@ -43,6 +43,7 @@ class AlarmNotifications {
         }
         content.title = NSString.localizedUserNotificationString(forKey: name, arguments: nil)
         content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off.", arguments: nil)
+        content.sound = UNNotificationSound(named: "classic.caf")
         let days = ["Sun", "M", "T", "W", "R", "F", "Sat"]
         for i in 1...7 {
             if repeats == "" {
@@ -86,6 +87,7 @@ class AlarmNotifications {
         content.categoryIdentifier = "SNOOZABLE"
         content.title = NSString.localizedUserNotificationString(forKey: name, arguments: nil)
         content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off.", arguments: nil)
+        content.sound = UNNotificationSound(named: "classic.caf")
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 540, repeats: false)
         let request = UNNotificationRequest(identifier: alarm.objectID.uriRepresentation().absoluteString + "snooze", content: content, trigger: trigger)
         let center = UNUserNotificationCenter.current()
