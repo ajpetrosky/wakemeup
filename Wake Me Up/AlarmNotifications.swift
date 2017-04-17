@@ -30,6 +30,8 @@ class AlarmNotifications {
         let minute = Int(minArray[0])
         if minArray[1] == "PM" {
             hour = hour! + 12
+        } else if minArray[1] == "AM" && hour == 12 {
+            hour = 0;
         }
         
         let content = UNMutableNotificationContent()
