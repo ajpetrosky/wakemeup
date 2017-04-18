@@ -38,7 +38,7 @@ class AlarmNotifications {
         let snooze = alarm.value(forKey: "snooze") as! Bool
         if snooze {
             content.categoryIdentifier = "SNOOZABLE"
-            content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off, dismmiss to snooze.", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off, dismiss to snooze.", arguments: nil)
         } else {
             content.categoryIdentifier = "GENERAL"
             content.body = NSString.localizedUserNotificationString(forKey: "Alarm for " + timeStr + ". Open this notification to turn off.", arguments: nil)
